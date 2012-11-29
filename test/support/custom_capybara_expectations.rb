@@ -1,0 +1,40 @@
+#class Capybara::Session
+#
+#  def has_flash_message?(message)
+#    within '#flash' do
+#      has_content? message
+#    end
+#  end
+#
+#  def has_link_to?(path)
+#    has_selector? :xpath, "//a[@href='#{path}']"
+#  end
+#end
+
+#CapybaraMiniTestSpec::Matcher.new(:has_flash_message?)
+#CapybaraMiniTestSpec::Matcher.new(:has_link_to?)
+
+
+
+module Capybara::DSL
+  
+  # Signs a user in by filling the user form and submitting.
+  # This enables you to get a similar effect like the Devise::TestHelpers, 
+  # which are not accessible from within integration tests.
+  # Also, you can easily replace the authentication gem later on.
+  #
+  # @param [User] user the user you would like to sign in or nil if
+  #               you want to let this method generate a default user.
+  # @return [User] the signed in user.
+  def sign_in(athlete=nil)
+    athlete ||= Factory.create(:athlete)
+    
+    visit athlete_session_path
+    fill_in 'Email', with: athlete.email
+    fill_in 'Mot de passe', with: athlete.password
+    
+    click_button 'Connexion'
+    athlete
+  end
+  
+end

@@ -7,8 +7,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 
-<%= yield %>
+  <div id="nav">
+    <% if athlete_signed_in? %>
+      <%= current_athlete.email %>.
+      <%= link_to "Se déconnecter", destroy_athlete_session_path, :method => :delete %>
+    <% else %>
+      <%= link_to "Créer un compte", new_athlete_registration_path %> ou <%= link_to "se connecter", new_athlete_session_path %>
+    <% end %>
+  </div>
+
+  <%= yield %>
 
 </body>
 </html>

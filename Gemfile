@@ -22,10 +22,18 @@ end
 
 gem 'jquery-rails'
 
+
+gem 'devise'
+gem 'devise-i18n'
+
+
 group :test do
   gem 'minitest'
   gem 'capybara'
+  gem 'capybara_minitest_spec'
   gem 'turn'
+  gem 'database_cleaner'
+  gem 'factory_girl'
   # spork and autotest allow you to run tests when you save a file.
   # run `spork` in one terminal from the project root.
   # run `bundle exec autotest -cf` in one terminal from the project root.
